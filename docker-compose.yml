@@ -1,0 +1,26 @@
+version : '3.9'
+services:
+  ununtu:
+    build:
+      context: .
+      dockerfile: ./dockerfiles/ubuntu/Dockerfile
+    container_name: project_build
+    hostname: project_build
+    volumes:
+      - webapps:/usr/local/tomcat/webapps:rw
+
+  tomcat:
+    project_tomcat:
+      image: tomcat:10.0-jdk11-temurin-focal
+    container_name: project_tomcat
+    hostname: project_tomcat
+    volumes:
+      - webapps:/usr/local/tomcat/webapps:rw
+    networks:
+      - project_net
+  
+
+volumes:
+  webapps:
+networks:
+  project_net:
