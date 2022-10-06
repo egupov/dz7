@@ -10,7 +10,7 @@ services:
       - webapps:/usr/local/tomcat/webapps:rw
 
   tomcat:
-    project_tomcat:
+    build:
       image: tomcat:10.0-jdk11-temurin-focal
     container_name: project_tomcat
     hostname: project_tomcat
@@ -18,9 +18,14 @@ services:
       - webapps:/usr/local/tomcat/webapps:rw
     networks:
       - project_net
+<<<<<<< HEAD
+    ports: '8080:8080'
+  
+=======
     depends_on:
       - ubuntu
     ports: 8080:8080   
+>>>>>>> bb5fe99f79beb37b68e659e8dc6108f6c4bac32f
 
 volumes:
   webapps:

@@ -1,10 +1,6 @@
-FROM ubuntu:20.04
+FROM alpine:latest
 WORKDIR /usr/local/tomcat
-RUN apt-get update \
-  && apt-get install -y \
-             apt-utils \
-             git \
-             maven
+RUN apk --no-cache --update add git maven
 RUN git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git 
     cd boxfuse-sample-java-war-hello/ && \
     mvn package  && \
