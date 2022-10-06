@@ -2,25 +2,24 @@ version : '3.9'
 services:
   ununtu:
     build:
-      dockerfile: ./dockerfiles/ubuntu/Dockerfile
+      context: dockerfiles/ubuntu/
     container_name: project_build
     hostname: project_build
     volumes:
       - webapps:/usr/local/tomcat/webapps:rw
 
   tomcat:
-    tomcat:
-      build:
-      dockerfile: ./dockerfiles/tomcat/Dockerfile
+    image: 'tomcat'
     container_name: project_tomcat
     hostname: project_tomcat
     volumes:
       - webapps:/usr/local/tomcat/webapps:rw
     networks:
       - project_net
-    depends_on:
-      - ubuntu
-    ports: 8080:8080   
+    #depends_on:
+      #- ubuntu
+    ports:
+      - '80:8080'
 
 volumes:
   webapps:
