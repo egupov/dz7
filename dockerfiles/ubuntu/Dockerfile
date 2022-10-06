@@ -1,5 +1,14 @@
-FROM alpine:latest
-WORKDIR /usr/local/tomcat
-RUN apk --no-cache --update add git maven
+FROM tomcat:10.0-jdk11-temurin-focal
+
+ENV TZ=Europe/Moscow
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+RUN apt-get update \
+  && apt-get install -y \
+             apt-utils \
+             git \
+             maven
 RUN git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git && \
-    cp /usr/local/tomcat/boxfuse-sample-java-war-hello/target/classes/hello-1.0.war /usr/local/tomcat/webapps
+    cd boxfuse-sample-java-war-hello/ && \
+    mvn package && \
+    cp /usr/local/tomcat/boxfuse-sample-java-war-hello/target/hello-1.0.war /usr/local/tomcat/webapps
