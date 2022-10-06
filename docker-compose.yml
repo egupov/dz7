@@ -9,7 +9,7 @@ services:
       - webapps:/usr/local/tomcat/webapps:rw
 
   tomcat:
-    image: 'tomcat'
+    image: 'tomcat:10.0-jdk11-temurin-focal'
     container_name: project_tomcat
     hostname: project_tomcat
     volumes:
